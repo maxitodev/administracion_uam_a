@@ -41,13 +41,22 @@ Esta UEA proporciona las herramientas y estrategias necesarias para **dirigir pr
 - **Personas:** liderazgo, roles, negociación y trabajo colaborativo.
 - **Control:** métricas, cambios, riesgos y lecciones aprendidas.
 
+## 📝 Tareas
+
+| Tarea | Tema | Fecha límite |
+|---|---|---|
+| [Tarea 1](tarea1/) | Introducción a la administración de proyectos y entorno de trabajo (Git, Docker, PostgreSQL, MySQL) | 10 de octubre de 2026 |
+
 ## 🗂️ Organización del repositorio
 
 ```text
 📦 administracion_uam_a
- ├── 📚 materiales/       # Apuntes y recursos de la UEA
- ├── 📝 actividades/      # Ejercicios y entregas
- ├── 📊 proyectos/        # Evidencias y documentación
+ ├── 📝 tarea1/           # Tarea 1: investigación y contenedores
+ │    ├── postgres/       # PostgreSQL 18 + Adminer (antes PostgreSQL 17)
+ │    ├── mysql/          # MySQL 9.7 + phpMyAdmin
+ │    ├── img/            # Capturas de pantalla
+ │    └── README.md       # Entrega de la tarea
+ ├── 📄 LICENSE           # Licencia MIT
  └── 📖 README.md         # Guía del repositorio
 ```
 
