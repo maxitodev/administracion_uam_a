@@ -504,6 +504,8 @@ Es lo mismo que se hizo con `postgres:18.6` y que no se hacía con `postgres:17`
 
 ![PostgreSQL 17 en docker compose ps y su versión](img/02-pg17-ps-version.png)
 
+Las capturas 1 y 2 se tomaron con el commit de PostgreSQL 17 sacado en una carpeta aparte (`git worktree add ..\pg17-capturas 555e83b`), porque en `tarea1/postgres/` ya está el contenedor de la 18; por eso la ruta del prompt dice `pg17-capturas`.
+
 **3. PostgreSQL 18: `docker compose ps` con `(healthy)` y `SELECT version();`**
 
 ![PostgreSQL 18 healthy en docker compose ps y su versión](img/03-pg18-ps-version.png)
