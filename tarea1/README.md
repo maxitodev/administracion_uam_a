@@ -32,7 +32,7 @@ Universidad Autónoma Metropolitana, Unidad Azcapotzalco · División de Ciencia
 | `.gitignore` con `data/`, `.env`, `Thumbs.db` y `.DS_Store`, antes del Ejercicio 3 | [.gitignore](../.gitignore), confirmado antes que el contenedor de PostgreSQL 17 |
 | `.gitattributes` en la raíz | [.gitattributes](../.gitattributes) |
 | Al menos cinco confirmaciones en días distintos | Historial en la [captura 8](#ejercicio-5-capturas) |
-| README en la raíz con liga a cada tarea | [README.md](../README.md#-tareas) |
+| README en la raíz con liga a cada tarea | [README.md](../README.md#tareas) |
 
 El `.gitattributes` deja que Git normalice los finales de línea (`* text=auto`), pero obliga a usar LF en los `.sh`, `.sql`, `.yaml`, `Dockerfile` y `.env*`. Esos archivos se leen dentro de contenedores Linux, y un script de bash guardado con CRLF de Windows falla con `$'\r': command not found`.
 
