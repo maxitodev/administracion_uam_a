@@ -1,0 +1,10 @@
+# Datos del contenedor de PostgreSQL 17 (bind mount ./data).
+# Son archivos binarios del servidor: se regeneran solos y no se versionan.
+data/
+
+# Variables de entorno con contraseñas reales. Sí se versiona el .env.example.
+.env
+
+# Basura que generan Windows y macOS al abrir carpetas.
+Thumbs.db
+.DS_Store

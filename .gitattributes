@@ -1,2 +1,16 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Lo que se ejecuta o se lee DENTRO del contenedor (Linux) va siempre con LF,
+# aunque se clone en Windows. Un script con CRLF falla con «$'\r': command not found».
+*.sh        text eol=lf
+*.sql       text eol=lf
+*.yaml      text eol=lf
+*.yml       text eol=lf
+Dockerfile  text eol=lf
+.env*       text eol=lf
+
+# Binarios: Git no debe tocarlos.
+*.png       binary
+*.jpg       binary
+*.pdf       binary
