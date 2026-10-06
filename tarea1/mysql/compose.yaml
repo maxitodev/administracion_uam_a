@@ -1,0 +1,85 @@
+# ---------------------------------------------------------------------------
+# Otro stack · MySQL 9.7 LTS + phpMyAdmin
+# UEA 1151055 · Administración de Proyectos de Software · Trimestre 26-O
+# UAM Azcapotzalco · Departamento de Sistemas
+#
+# Es el compose.yaml de PostgreSQL 18 traducido a MySQL: misma forma,
+# otras variables, otro puerto y otra ruta de datos.
+#
+#   docker compose up -d                          prender
+#   docker compose exec db mysql -u proyecto -p   entrar al cliente
+#   http://localhost:8081                         abrir phpMyAdmin
+#   docker compose stop                           apagar
+#
+# Aquí no hay Dockerfile: se usa la imagen oficial tal cual, así que basta
+# con image: y no hace falta build:.
+# ---------------------------------------------------------------------------
+
+name: apsw-1151055-mysql
+
+services:
+
+  db:
+    # Versión completa fijada, igual que postgres:18.6. La serie 9.7 es LTS;
+    # latest apunta a la Innovation más nueva y cambia sin avisar.
+    image: mysql:9.7.2
+    container_name: apsw_mysql
+    restart: unless-stopped
+
+    environment:
+      # Mismos valores por defecto que en PostgreSQL: sin .env, levanta igual.
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-proyecto}
+      MYSQL_USER: ${MYSQL_USER:-proyecto}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-practica_local_26o}
+      # MySQL además exige la contraseña del superusuario root. En
+      # PostgreSQL el superusuario es el propio POSTGRES_USER.
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root_local_26o}
+
+    # Lo que en PostgreSQL era POSTGRES_INITDB_ARGS: codificación y colación
+    # explícitas. En MySQL se pasan como opciones del servidor.
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_0900_ai_ci
+
+    ports:
+      # 3307 y no 3306: en esta máquina el 3306 ya lo ocupa un MySQL 8.4
+      # instalado en Windows. Se cambia el de la IZQUIERDA con MYSQL_PORT.
+      - "127.0.0.1:${MYSQL_PORT:-3307}:3306"
+
+    volumes:
+      # Volumen con nombre, igual que datos_db. MySQL guarda en /var/lib/mysql.
+      - datos_mysql:/var/lib/mysql
+
+    healthcheck:
+      # -h 127.0.0.1 obliga a usar TCP: mientras la imagen inicializa, el
+      # servidor temporal no escucha en red, así que no da «healthy» antes
+      # de tiempo. No lleva usuario ni contraseña: «ping» responde 0 si el
+      # servidor está arriba aunque le niegue el acceso.
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "--silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  phpmyadmin:
+    # El equivalente de Adminer, hecho sólo para MySQL y MariaDB.
+    image: phpmyadmin:5.2.3
+    container_name: apsw_phpmyadmin
+    restart: unless-stopped
+    ports:
+      # 8081 y no 8080: el 8080 es de Adminer y los dos stacks pueden estar
+      # encendidos a la vez. Dentro del contenedor, phpMyAdmin escucha en el 80.
+      # La variable se llama PHPMYADMIN_PORT y no PMA_PORT para no confundirla
+      # con la PMA_PORT de abajo, que es el puerto de MySQL que usa phpMyAdmin.
+      - "127.0.0.1:${PHPMYADMIN_PORT:-8081}:80"
+    environment:
+      # Lo que en Adminer era ADMINER_DEFAULT_SERVER.
+      PMA_HOST: db
+      PMA_PORT: 3306
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  # Sobrevive a «docker compose down»; «down -v» sí lo borra.
+  datos_mysql:
