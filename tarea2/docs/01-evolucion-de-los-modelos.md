@@ -33,7 +33,7 @@ Un modelo con razonamiento explícito escribe pasos intermedios antes de dar la 
 - *Cadena de pensamiento.* Si en el prompt se dan ejemplos resueltos paso a paso, el modelo imita los pasos y acierta más en problemas de aritmética y lógica (Wei, Wang et al., 2022). Incluso sin ejemplos, agregar «pensemos paso a paso» subió el acierto en el conjunto MultiArith de 17.7 % a 78.7 % con el mismo modelo (Kojima et al., 2022). La red es la misma; sólo cambió cómo se usa.
 - *Aprendizaje por refuerzo.* Los modelos de razonamiento actuales se entrenan para producir esa cadena por su cuenta, premiando las respuestas que se pueden verificar, como un resultado matemático o un programa que pasa sus pruebas. OpenAI (2024) reportó que o1 mejora tanto con más entrenamiento por refuerzo como con más tiempo para pensar. DeepSeek-R1 mostró que el refuerzo puro, sin ejemplos de razonamiento escritos por personas, hace aparecer conductas como revisar y corregir la propia respuesta, y que eso se puede destilar a modelos más pequeños (Guo et al., 2025).
 
-**2. Cómputo adicional al responder** (*test-time compute*). Pensar más cuesta más tokens y más tiempo. Snell et al. (2025) encontraron que repartir bien ese cómputo según la dificultad de la pregunta puede rendir más que usar un modelo 14 veces más grande. Por eso los proveedores lo ofrecen como un modo con presupuesto: Anthropic lo llama *extended thinking* y deja fijar cuántos tokens puede usar el modelo para razonar (Anthropic, s. f.-a); Google controla la profundidad con un nivel de *thinking* (Google, 2026).
+**2. Cómputo adicional al responder** (*test-time compute*). Pensar más cuesta más tokens y más tiempo. Snell et al. (2025) encontraron que repartir bien ese cómputo según la dificultad de la pregunta puede rendir más que usar un modelo 14 veces más grande. Por eso los proveedores lo ofrecen como un modo con presupuesto: Anthropic lo llama *extended thinking* y deja fijar cuántos tokens puede usar el modelo para razonar (Anthropic, s. f.-b); Google controla la profundidad con un nivel de *thinking* (Google, 2026).
 
 El propio artículo de cadena de pensamiento advierte que la técnica funciona en modelos suficientemente grandes (Wei, Wang et al., 2022). Lo correcto es decir que el tamaño es necesario pero no suficiente: el razonamiento sale del entrenamiento y del cómputo extra al responder, no del tamaño solo.
 
@@ -45,7 +45,7 @@ El propio artículo de cadena de pensamiento advierte que la técnica funciona e
 
 ## Referencias
 
-Anthropic. (s. f.-a). *Extended thinking*. Claude Platform Docs. Recuperado el 15 de octubre de 2026, de https://platform.claude.com/docs/en/build-with-claude/extended-thinking
+Anthropic. (s. f.-b). *Extended thinking*. Claude Platform Docs. Recuperado el 15 de octubre de 2026, de https://platform.claude.com/docs/en/build-with-claude/extended-thinking
 
 Bengio, Y., Ducharme, R., Vincent, P., & Jauvin, C. (2003). A neural probabilistic language model. *Journal of Machine Learning Research, 3*, 1137–1155. https://www.jmlr.org/papers/v3/bengio03a.html
 

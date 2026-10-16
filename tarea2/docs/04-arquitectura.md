@@ -71,7 +71,7 @@ Los dos servidores que instalé usan stdio (Model Context Protocol, 2026j). Por 
 
 ## Ciclo de vida: de 2025-11-25 a 2026-07-28
 
-Hasta la revisión 2025-11-25, toda conexión empezaba con un *handshake*: el cliente manda `initialize` con su versión y sus capacidades, el servidor responde con las suyas y el cliente confirma con `notifications/initialized` (Model Context Protocol, 2025a). Así se ve con el servidor de archivos:
+Hasta la revisión 2025-11-25, toda conexión empezaba con un *handshake*: el cliente manda `initialize` con su versión y sus capacidades, el servidor responde con las suyas y el cliente confirma con `notifications/initialized` (Model Context Protocol, 2025). Así se ve con el servidor de archivos:
 
 ```text
 --> {"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{},
@@ -87,7 +87,7 @@ Lo comprobé con mi cliente de prueba (`servidor-propio/comprobar.py`, SDK 2.3.0
 
 ## Referencias
 
-Model Context Protocol. (2025a, 25 de noviembre). *Lifecycle* (Revisión 2025-11-25). https://modelcontextprotocol.io/specification/2025-11-25/basic/lifecycle
+Model Context Protocol. (2025, 25 de noviembre). *Lifecycle* (Revisión 2025-11-25). https://modelcontextprotocol.io/specification/2025-11-25/basic/lifecycle
 
 Model Context Protocol. (2026a, 28 de julio). *Architecture* (Revisión 2026-07-28). https://modelcontextprotocol.io/specification/2026-07-28/architecture
 

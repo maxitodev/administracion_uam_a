@@ -12,7 +12,7 @@ Las razones de ese aislamiento son de dos tipos, y conviene separarlas porque se
 - **Sólo ve lo que viene en la petición.** Lo único que conoce de mi proyecto es el texto que le mando en esa conversación (su ventana de contexto). Si un archivo no va en la petición, para el modelo no existe. Tampoco recuerda nada entre una petición y otra: la aplicación le reenvía la conversación completa cada vez.
 - **Su salida es texto.** Aunque escriba `rm -rf build/` o un archivo completo, eso sólo son caracteres en una respuesta. Para que algo pase en el disco, otro programa tiene que leer esa respuesta y ejecutarla.
 
-Esto sigue siendo cierto cuando el modelo «usa herramientas». En el *function calling* de OpenAI y en el *tool use* de Anthropic, el modelo sólo devuelve una petición estructurada, con el nombre de una función y sus argumentos en JSON. La aplicación del desarrollador es la que ejecuta la función y le regresa el resultado en el siguiente mensaje (Anthropic, s. f.-b; OpenAI, s. f.). La idea viene de trabajos como Toolformer, donde el modelo aprende cuándo llamar una API y con qué argumentos (Schick et al., 2023), y ReAct, donde alterna razonamiento y acciones (Yao et al., 2023). En los dos casos el modelo decide, pero quien actúa es el programa que lo rodea.
+Esto sigue siendo cierto cuando el modelo «usa herramientas». En el *function calling* de OpenAI y en el *tool use* de Anthropic, el modelo sólo devuelve una petición estructurada, con el nombre de una función y sus argumentos en JSON. La aplicación del desarrollador es la que ejecuta la función y le regresa el resultado en el siguiente mensaje (Anthropic, s. f.-c; OpenAI, s. f.-a). La idea viene de trabajos como Toolformer, donde el modelo aprende cuándo llamar una API y con qué argumentos (Schick et al., 2023), y ReAct, donde alterna razonamiento y acciones (Yao et al., 2023). En los dos casos el modelo decide, pero quien actúa es el programa que lo rodea.
 
 ## Razones de seguridad: no debe
 
@@ -34,11 +34,11 @@ Las herramientas resolvieron la parte de arquitectura, pero cada aplicación las
 
 ## Referencias
 
-Anthropic. (s. f.-b). *Tool use with Claude*. Claude Platform Docs. Recuperado el 15 de octubre de 2026, de https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview
+Anthropic. (s. f.-c). *Tool use with Claude*. Claude Platform Docs. Recuperado el 15 de octubre de 2026, de https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview
 
 Greshake, K., Abdelnabi, S., Mishra, S., Endres, C., Holz, T., & Fritz, M. (2023). Not what you've signed up for: Compromising real-world LLM-integrated applications with indirect prompt injection. En *Proceedings of the 16th ACM Workshop on Artificial Intelligence and Security* (pp. 79–90). Association for Computing Machinery. https://doi.org/10.1145/3605764.3623985
 
-OpenAI. (s. f.). *Function calling*. OpenAI API. Recuperado el 15 de octubre de 2026, de https://developers.openai.com/api/docs/guides/function-calling
+OpenAI. (s. f.-a). *Function calling*. OpenAI API. Recuperado el 15 de octubre de 2026, de https://developers.openai.com/api/docs/guides/function-calling
 
 OWASP Foundation. (s. f.-a). *LLM01:2025 Prompt injection*. OWASP Gen AI Security Project. Recuperado el 15 de octubre de 2026, de https://genai.owasp.org/llmrisk/llm01-prompt-injection/
 

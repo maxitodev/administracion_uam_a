@@ -10,7 +10,7 @@ Lo importante es **quién decide**. Al programar contra una API, yo leo su docum
 
 ## Qué es MCP
 
-El Model Context Protocol es un protocolo abierto para que las aplicaciones con LLM se conecten a fuentes de datos y herramientas externas. Sus mensajes son de JSON-RPC 2.0 (Model Context Protocol, 2026h), un formato ligero de llamada remota: cada petición lleva un `method`, sus `params` y un `id`, y la respuesta lleva el mismo `id` con un `result` o un `error` (JSON-RPC Working Group, 2013).
+El Model Context Protocol es un protocolo abierto para que las aplicaciones con LLM se conecten a fuentes de datos y herramientas externas. Anthropic lo presentó el 25 de noviembre de 2024 (Anthropic, 2024) y en diciembre de 2025 lo donó a la Agentic AI Foundation, un fondo de la Linux Foundation que cofundó con Block y OpenAI (Anthropic, 2025; Linux Foundation, 2025). Hoy lo gobierna esa fundación y no una sola empresa. Sus mensajes son de JSON-RPC 2.0 (Model Context Protocol, 2026h), un formato ligero de llamada remota: cada petición lleva un `method`, sus `params` y un `id`, y la respuesta lleva el mismo `id` con un `result` o un `error` (JSON-RPC Working Group, 2013).
 
 Un servidor MCP no se usa programando cada llamada. Publica un **catálogo**: la lista de sus herramientas con su nombre, una descripción en lenguaje natural y el esquema JSON de sus parámetros. La aplicación lo pide con `tools/list`, se lo pasa al modelo y el modelo decide, en ese momento y según lo que le pidió el usuario, cuál usar. La especificación lo dice así: las herramientas están «controladas por el modelo» (Model Context Protocol, 2026i). Cuando el modelo elige una, la aplicación la ejecuta con `tools/call`, pidiendo antes permiso al usuario.
 
@@ -65,11 +65,17 @@ El video «Diferencia entre API y MCP» (Vida MRR - Programacion web, 2026) expl
 
 ## Referencias
 
+Anthropic. (2024, 25 de noviembre). *Introducing the Model Context Protocol*. https://www.anthropic.com/news/model-context-protocol
+
+Anthropic. (2025, 9 de diciembre). *Donating the Model Context Protocol and establishing the Agentic AI Foundation*. https://www.anthropic.com/news/donating-the-model-context-protocol-and-establishing-of-the-agentic-ai-foundation
+
 Fielding, R. T. (2000). *Architectural styles and the design of network-based software architectures* [Tesis doctoral, University of California, Irvine]. https://ics.uci.edu/~fielding/pubs/dissertation/top.htm
 
 GitHub. (s. f.). *GitHub MCP Server* [Software]. GitHub. Recuperado el 16 de octubre de 2026, de https://github.com/github/github-mcp-server
 
 JSON-RPC Working Group. (2013, 4 de enero). *JSON-RPC 2.0 specification*. https://www.jsonrpc.org/specification
+
+Linux Foundation. (2025, 9 de diciembre). *Linux Foundation announces the formation of the Agentic AI Foundation (AAIF), anchored by new project contributions including Model Context Protocol (MCP), goose and AGENTS.md* [Comunicado de prensa]. https://www.linuxfoundation.org/press/linux-foundation-announces-the-formation-of-the-agentic-ai-foundation
 
 Model Context Protocol. (2026h, 28 de julio). *Specification* (Revisión 2026-07-28). https://modelcontextprotocol.io/specification/2026-07-28
 
