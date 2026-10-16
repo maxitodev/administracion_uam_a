@@ -227,11 +227,13 @@ Probado en Windows 11 Pro 25H2 con Node.js 24.14.0, npm 11.11.1, Python 3.13.4 y
 5. **Registrar el servidor en Claude Desktop.** Hay dos formas:
 
    - **A mano.** Menú de Claude → **Settings… → Developer → Edit Config**. Se abre `%APPDATA%\Claude\claude_desktop_config.json`. Agregar la clave `mcpServers` del [archivo de configuración](#archivo-de-configuración) con las rutas de la máquina, guardar, y **cerrar Claude Desktop por completo** desde el icono de la bandeja (no basta con cerrar la ventana).
-   - **Con el script.** Cerrar Claude Desktop desde la bandeja y correr `node tarea2\config\instalar-mcp.mjs`. El script calcula las rutas según dónde esté clonado el repositorio, respeta lo que ya tenga el archivo y deja un respaldo `.bak`.
+   - **Con el script.** Cerrar Claude Desktop desde la bandeja y correr `node tarea2\config\instalar-mcp.mjs`. El script calcula las rutas según dónde esté clonado el repositorio, respeta lo que ya tenga el archivo y deja un respaldo `.bak` ([captura 8a](#capturas)).
 
    Un aviso, porque me pasó: Claude Desktop guarda sus preferencias en ese mismo archivo y lo reescribe mientras está abierto. Si se edita con la app encendida, puede borrar lo que se agregó. Por eso el script se niega a correr si la encuentra abierta.
 
-6. **Comprobar que el cliente lo reconoce.** Al abrir Claude Desktop, **Settings → Developer** debe mostrar `sistema-archivos` y `entregas-apsw` como *running* ([captura 8](#capturas)). En el botón **+** de la caja de mensaje → **Connectors**, `sistema-archivos` lista sus 14 herramientas ([captura 9](#capturas)). Si algo falla, el registro está en `%APPDATA%\Claude\logs\mcp-server-sistema-archivos.log`.
+6. **Comprobar que el cliente lo reconoce.** Al abrir Claude Desktop, en los ajustes de desarrollador (*Settings → Developer*), la sección **Servidores MCP locales** muestra `sistema-archivos` y `entregas-apsw` como **En ejecución**, con el comando y los argumentos de cada uno ([capturas 8b y 8c](#capturas)). En el botón **+** de la caja de mensaje → **Connectors**, `sistema-archivos` lista sus 14 herramientas ([captura 9](#capturas)). Si algo falla, el botón **Ver registros** abre el registro de cada servidor, que en esta instalación está en `%LOCALAPPDATA%\Claude\Logs\mcp-server-sistema-archivos.log`.
+
+   En ese registro se ve el *handshake* (`initialize`, `notifications/initialized`, `tools/list`) y una línea clave: *Client does not support MCP Roots, using allowed directories set from server args*. El chat de Claude Desktop no manda raíces, así que el servidor usa la carpeta del argumento. La pestaña Code de la misma aplicación sí las manda y le cambia la carpeta: está explicado en el [punto 5](docs/05-servidor-de-sistema-de-archivos.md#cómo-lo-limitan-los-directorios-permitidos). Por eso la demostración se hace en el chat.
 
 #### Archivo de configuración
 
@@ -372,9 +374,17 @@ Está conectado al mismo cliente, en la entrada `entregas-apsw` del archivo de c
 
 <img src="img/07-holamundokmp-android-studio.png" width="300" alt="Panel Running Devices de Android Studio con HolaMundoKMP en el Pixel 7 Pro: ¡Hola Mundo! Compose Multiplatform en Android 17">
 
-**8. Claude Desktop reconoce los dos servidores**
+**8a. El instalador registra los dos servidores**
 
-![Ajustes de desarrollador de Claude Desktop con sistema-archivos y entregas-apsw en ejecución](img/08-claude-desktop-servidores.png)
+![Salida de instalar-mcp.mjs con los dos servidores agregados a claude_desktop_config.json](img/08a-instalar-mcp.png)
+
+**8b. Claude Desktop reconoce `sistema-archivos`**
+
+![Servidores MCP locales de Claude Desktop con sistema-archivos en ejecución y sus argumentos](img/08b-servidor-sistema-archivos.png)
+
+**8c. Claude Desktop reconoce `entregas-apsw`**
+
+![Servidores MCP locales de Claude Desktop con entregas-apsw en ejecución y sus argumentos](img/08c-servidor-entregas-apsw.png)
 
 **9. Las herramientas de `sistema-archivos`**
 
@@ -415,7 +425,7 @@ Está conectado al mismo cliente, en la entrada `entregas-apsw` del archivo de c
 Las diapositivas están en [`presentacion/`](presentacion/): [`diapositivas.md`](presentacion/diapositivas.md) (en formato Marp; también exportadas a [HTML](presentacion/diapositivas.html)) y el [guion](presentacion/guion.md) con los tiempos, la demostración en vivo y el plan B del video de respaldo. Las dos preguntas que hay que poder contestar:
 
 - **¿En qué se diferencia MCP de consumir una API?** En una API, yo decido en el código qué se llama y cuándo; el contrato es fijo y cada aplicación integra cada API por su cuenta. En MCP, el servidor publica un catálogo que el modelo descubre en el momento y decide qué usar, con mi aprobación. Además, el mismo servidor sirve a cualquier host. Y MCP no reemplaza a la API: la envuelve.
-- **¿Qué habilita exactamente el servidor de sistema de archivos?** Catorce herramientas para listar, leer, buscar por nombre, crear, editar y mover archivos, **sólo** dentro de las carpetas que recibe al arrancar (aquí, `tarea2/sandbox/`). Fuera de ellas no habilita nada: rechaza la ruta antes de tocar el disco, aunque el modelo la pida.
+- **¿Qué habilita exactamente el servidor de sistema de archivos?** Catorce herramientas para listar, leer, buscar por nombre, crear, editar y mover archivos, **sólo** dentro de las carpetas que recibe al arrancar (aquí, `tarea2/sandbox/`), o dentro de las raíces que le mande el cliente si las soporta. Fuera de ellas no habilita nada: rechaza la ruta antes de tocar el disco, aunque el modelo la pida.
 
 ---
 
