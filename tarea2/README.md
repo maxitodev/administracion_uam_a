@@ -67,8 +67,8 @@ git clone https://github.com/gabrielhuav/HolaMundoKMP.git C:\dev\HolaMundoKMP
 | Android Studio | 2026.2.1 (compilación AI-262.9437.185.2621.16467767), con su JDK OpenJDK 25.0.3 |
 | Flutter | 3.47.7, canal stable, revisión `abaf9c5237` del 8 de octubre de 2026 |
 | Dart | 3.13.5 (incluido en Flutter), DevTools 2.60.0 |
-| SDK de Android | Platforms `android-37.0`, `android-36.1` y `android-35`; Build-Tools 37.0.0; Platform-Tools 37.0.0; Emulator 36.5.11; Command-line Tools *[versión que instaló el SDK Manager]* |
-| Dispositivo | *[modelo del teléfono]*, Android *[versión]* (API *[nivel]*) |
+| SDK de Android | Platforms `android-37.0`, `android-36.1` y `android-35`; Build-Tools 37.0.0; Platform-Tools 37.0.0; Emulator 36.5.11; Command-line Tools 23.0 |
+| Dispositivo | Google Pixel 7 Pro, Android 17 (API 37), parche de seguridad del 5 de octubre de 2026 |
 
 ### 1. Android Studio y las Command-line Tools
 
@@ -107,7 +107,7 @@ Debe salir **[√] Flutter** y **[√] Android toolchain** ([captura 3](#captura
 ### 4. El teléfono en modo desarrollador
 
 1. **Ajustes → Acerca del teléfono → Número de compilación**, siete toques, hasta que aparece «Ahora eres desarrollador».
-2. **Ajustes → Sistema → Opciones de desarrollador → Depuración por USB**, activada ([captura 4](#capturas)).
+2. **Ajustes → Sistema → Opciones para desarrolladores → Depuración por USB**, activada ([captura 4](#capturas)).
 3. Conecté el teléfono por USB y acepté en su pantalla la huella RSA de la computadora.
 4. `flutter devices` lo lista junto a Windows, Chrome y Edge ([captura 5](#capturas)).
 
@@ -121,7 +121,7 @@ flutter pub get
 flutter run -d <id del teléfono>
 ```
 
-La app muestra el saludo «¡Hola, Mundo!» con el nombre del sistema y un contador que sube con el botón «Tócame» ([captura 6](#capturas)). Antes de conectar el teléfono comprobé que compila con `flutter build apk --debug`, que generó `build\app\outputs\flutter-apk\app-debug.apk` en 231 s la primera vez, porque Gradle descarga sus dependencias.
+En el Pixel 7 Pro, la app muestra «¡Hola, Mundo!», el saludo de la plataforma («¡Hola desde Android!») y un contador que sube con el botón «Tócame»: en la [captura 6](#capturas) va en 3. Antes de conectar el teléfono comprobé que compila con `flutter build apk --debug`. La primera vez tardó 231 s, porque Gradle descarga sus dependencias; con el teléfono conectado, `flutter run` compiló en 13.9 s e instaló el APK en 7.7 s.
 
 ### 6. HolaMundoKMP desde Android Studio
 
@@ -356,9 +356,9 @@ Está conectado al mismo cliente, en la entrada `entregas-apsw` del archivo de c
 
 ![flutter doctor con Flutter y Android toolchain en verde](img/03-flutter-doctor.png)
 
-**4. Opciones de desarrollador con la depuración USB activada**
+**4. Opciones para desarrolladores con la depuración por USB activada**
 
-![Opciones de desarrollador del teléfono con la depuración por USB activada](img/04-telefono-depuracion-usb.png)
+<img src="img/04-telefono-depuracion-usb.png" width="300" alt="Opciones para desarrolladores del Pixel 7 Pro con la depuración por USB activada">
 
 **5. `flutter devices` con el teléfono**
 
@@ -366,7 +366,7 @@ Está conectado al mismo cliente, en la entrada `entregas-apsw` del archivo de c
 
 **6. HolaMundoFlutter en el teléfono**
 
-![La app HolaMundoFlutter corriendo en el teléfono](img/06-holamundoflutter-telefono.png)
+<img src="img/06-holamundoflutter-telefono.png" width="300" alt="HolaMundoFlutter en el Pixel 7 Pro: ¡Hola desde Android! y el contador en 3">
 
 **7. HolaMundoKMP en el teléfono, desde Android Studio**
 
