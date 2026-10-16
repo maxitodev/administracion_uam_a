@@ -16,9 +16,9 @@ Conectar el modelo a mis archivos resuelve el aislamiento del [punto 2](02-el-pr
 
 | Mitigación | Contra qué riesgo | Cómo la apliqué |
 |---|---|---|
-| **Confirmación humana** | 1 y 3 | Claude Desktop pide aprobación antes de ejecutar una herramienta de un servidor local. Para las que escriben no elegí «permitir siempre»: reviso cada llamada. |
+| **Confirmación humana** | 1 y 3 | Por omisión, Claude Desktop pone las 14 herramientas en «Requiere aprobación». Antes de cada llamada muestra lo que va a mandar al servidor (la ruta y el contenido completo en `write_file`, el texto viejo y el nuevo en `edit_file`) y ofrece *Rechazar*, *Permitir siempre* o *Permitir una vez*. En las que escriben elegí *Permitir una vez*: reviso cada llamada. |
 | **Alcance limitado** | 2 y 3 | El servidor sólo recibe `tarea2/sandbox/`, nunca `C:\` ni mi carpeta de usuario. Es el principio de mínimo privilegio que OWASP propone contra el exceso de agencia (OWASP Foundation, s. f.-b). |
-| **Sólo lectura cuando basta** | 3 | Mi servidor propio sólo tiene herramientas de lectura, marcadas con `readOnlyHint`. En el de archivos, Claude Desktop deja apagar herramientas una por una: para una demostración de lectura se pueden apagar `write_file`, `edit_file` y `move_file`. |
+| **Sólo lectura cuando basta** | 3 | Mi servidor propio sólo tiene herramientas de lectura, marcadas con `readOnlyHint`. En el de archivos, Claude Desktop deja bloquear herramientas una por una o el grupo completo de *escritura/eliminación*: para una demostración de lectura se pueden bloquear `write_file`, `edit_file`, `create_directory` y `move_file`. |
 | **Revisar lo que expone el servidor** | 1 | Antes de conectarlo leí su `tools/list` completo y su código (lo que hace con las rutas está en el [punto 5](05-servidor-de-sistema-de-archivos.md)). Uso un servidor de referencia del propio proyecto MCP, no uno cualquiera. |
 | **Fijar la versión** | 1 (*rug pull*) | La configuración pide `server-filesystem@1.0.0`. Sin la versión, `npx -y` descargaría lo último publicado cada vez que arranca Claude Desktop, sin que yo lo revise. |
 | **Nada sensible en la carpeta y todo en Git** | 1 y 3 | En `sandbox/` sólo hay archivos de ejemplo. Como está dentro del repositorio, cualquier cambio del modelo aparece en `git diff` y se deshace con `git restore`. |

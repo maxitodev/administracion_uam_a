@@ -231,7 +231,7 @@ Probado en Windows 11 Pro 25H2 con Node.js 24.14.0, npm 11.11.1, Python 3.13.4 y
 
    Un aviso, porque me pasó: Claude Desktop guarda sus preferencias en ese mismo archivo y lo reescribe mientras está abierto. Si se edita con la app encendida, puede borrar lo que se agregó. Por eso el script se niega a correr si la encuentra abierta.
 
-6. **Comprobar que el cliente lo reconoce.** Al abrir Claude Desktop, en los ajustes de desarrollador (*Settings → Developer*), la sección **Servidores MCP locales** muestra `sistema-archivos` y `entregas-apsw` como **En ejecución**, con el comando y los argumentos de cada uno ([capturas 8b y 8c](#capturas)). En el botón **+** de la caja de mensaje → **Connectors**, `sistema-archivos` lista sus 14 herramientas ([captura 9](#capturas)). Si algo falla, el botón **Ver registros** abre el registro de cada servidor, que en esta instalación está en `%LOCALAPPDATA%\Claude\Logs\mcp-server-sistema-archivos.log`.
+6. **Comprobar que el cliente lo reconoce.** Al abrir Claude Desktop, en los ajustes de desarrollador (*Settings → Developer*), la sección **Servidores MCP locales** muestra `sistema-archivos` y `entregas-apsw` como **En ejecución**, con el comando y los argumentos de cada uno ([capturas 8b y 8c](#capturas)). En el botón **+** de la caja de mensaje → **Conectores** → `sistema-archivos`, la sección **Permisos de herramientas** lista sus 14 herramientas. Claude Desktop las agrupa según sus anotaciones: 10 *de solo lectura* y 4 *de escritura/eliminación*. Cada una se puede poner en permitir siempre, requerir aprobación (la opción por omisión) o bloquear ([captura 9](#capturas)). Si algo falla, el botón **Ver registros** abre el registro de cada servidor, que en esta instalación está en `%LOCALAPPDATA%\Claude\Logs\mcp-server-sistema-archivos.log`.
 
    En ese registro se ve el *handshake* (`initialize`, `notifications/initialized`, `tools/list`) y una línea clave: *Client does not support MCP Roots, using allowed directories set from server args*. El chat de Claude Desktop no manda raíces, así que el servidor usa la carpeta del argumento. La pestaña Code de la misma aplicación sí las manda y le cambia la carpeta: está explicado en el [punto 5](docs/05-servidor-de-sistema-de-archivos.md#cómo-lo-limitan-los-directorios-permitidos). Por eso la demostración se hace en el chat.
 
@@ -266,17 +266,21 @@ El contenido de [`config/claude_desktop_config.json`](config/claude_desktop_conf
 
 ### 3. Operaciones
 
-Cada operación la pedí en lenguaje natural en un chat de Claude Desktop. El modelo eligió la herramienta y Claude Desktop pidió permiso antes de ejecutarla.
+Cada operación la pedí en lenguaje natural en un chat de Claude Desktop. El modelo eligió la herramienta y Claude Desktop pidió permiso antes de ejecutarla: por omisión, las 14 herramientas están en **Requiere aprobación** ([captura 9](#capturas)).
 
 | # | Lo que pedí | Herramienta que usó el modelo | Captura |
 |---|---|---|---|
 | 1 | «Lista el contenido de la carpeta que tienes permitida en sistema-archivos.» | `list_allowed_directories`, `list_directory` | [10](#capturas) |
 | 2 | «Lee `proyecto/bitacora.md` y dime qué se hizo el 15 de octubre.» | `read_text_file` | [11](#capturas) |
-| 3 | «Crea `proyecto/minuta-2026-10-16.md` con una minuta breve: fecha, asistente (yo) y dos acuerdos: probar MCP y grabar el video de respaldo.» | `write_file` | [12](#capturas) |
-| 4 | «En `proyecto/pendientes.md` marca como hechas las dos primeras tareas.» | `edit_file` (devuelve el *diff*) | [13](#capturas) |
-| 5 | «Busca todos los archivos `.md` de la carpeta y dime cuál menciona Gradle.» | `search_files` con `**/*.md` y después `read_text_file` | [14](#capturas) |
+| 3 | «Crea `proyecto/minuta-2026-10-16.md` con una minuta breve: fecha, asistente (yo) y dos acuerdos: probar MCP y grabar el video de respaldo.» | `write_file` | [12a y 12](#capturas) |
+| 4 | «En `proyecto/pendientes.md` marca como hechas las dos primeras tareas.» | `edit_file` | [13a y 13](#capturas) |
+| 5 | «Busca todos los archivos `.md` de la carpeta y dime cuál menciona Gradle.» | `search_files` dos veces y después lectura de los archivos | [14](#capturas) |
 
-La búsqueda del servidor es por nombre (patrones *glob*); para buscar por contenido, el modelo combinó la búsqueda por nombre con la lectura de cada archivo. Los archivos que creó y modificó quedaron en [`sandbox/`](sandbox/) y en el historial del repositorio.
+Lo que se vio en cada una:
+
+- **Crear y modificar.** Antes de escribir, Claude Desktop muestra exactamente lo que va a mandar al servidor: la ruta y el contenido completo de la minuta para `write_file` (captura 12a), y el texto viejo y el nuevo para `edit_file` (captura 13a). Ofrece **Rechazar**, **Permitir siempre** o **Permitir una vez**. Elegí *Permitir una vez* en las dos.
+- **Buscar.** La búsqueda del servidor es por nombre, con patrones *glob*. El modelo primero buscó en la raíz de la carpeta y sólo encontró `LEEME.md`. Él mismo se dio cuenta de que faltaba la subcarpeta `proyecto`, repitió la búsqueda con un patrón recursivo y encontró los cinco `.md`. Para responder por contenido, los leyó y encontró «Gradle» en `notas/flutter-y-kmp.md`.
+- Los archivos que creó y modificó quedaron en [`sandbox/`](sandbox/) y en el historial del repositorio: [`minuta-2026-10-16.md`](sandbox/proyecto/minuta-2026-10-16.md) y las dos primeras casillas de [`pendientes.md`](sandbox/proyecto/pendientes.md).
 
 ### 4. El límite de seguridad
 
@@ -284,9 +288,9 @@ Le pedí un archivo que está fuera de la carpeta autorizada:
 
 > «Lee el archivo `C:\Users\maxsa\Documents\UAM-A\administracion_uam_a\tarea2\README.md`.»
 
-**Lo que respondió el modelo:** *[resumen de la respuesta de Claude, ver captura 15]*.
+**Lo que respondió el modelo** ([captura 15](#capturas)): que no pudo leerlo, porque el servidor de sistema de archivos rechazó la ruta: `tarea2\README.md` está fuera de la carpeta autorizada, que es `tarea2\sandbox`. Agregó que es justo lo que describe `LEEME.md` y me ofreció dos salidas legítimas: copiar el archivo dentro de `sandbox/` o pegarle su contenido en el chat.
 
-**Qué mecanismo lo impidió:** el modelo sí intentó usar `read_text_file`, pero el servidor normalizó la ruta, la comparó con su lista de directorios permitidos y la rechazó antes de tocar el disco, con este error:
+**Qué mecanismo lo impidió:** el modelo sí intentó leerlo con una herramienta del servidor, y Claude Desktop marcó esa llamada como **Fallido**. El servidor normalizó la ruta, la comparó con su lista de directorios permitidos y la rechazó antes de tocar el disco, con este error:
 
 ```text
 Access denied - path outside allowed directories: C:\Users\maxsa\Documents\UAM-A\administracion_uam_a\tarea2\README.md not in C:\Users\maxsa\Documents\UAM-A\administracion_uam_a\tarea2\sandbox
@@ -388,7 +392,7 @@ Está conectado al mismo cliente, en la entrada `entregas-apsw` del archivo de c
 
 **9. Las herramientas de `sistema-archivos`**
 
-![Menú de conectores de Claude Desktop con las herramientas del servidor de archivos](img/09-herramientas-sistema-archivos.png)
+![Permisos de herramientas de sistema-archivos en Claude Desktop: 10 de solo lectura y 4 de escritura, todas con Requiere aprobación](img/09-herramientas-sistema-archivos.png)
 
 **10. Listar la carpeta**
 
@@ -398,17 +402,25 @@ Está conectado al mismo cliente, en la entrada `entregas-apsw` del archivo de c
 
 ![Claude usando read_text_file sobre bitacora.md](img/11-op-leer.png)
 
+**12a. Claude Desktop pide permiso antes de `write_file`**
+
+![Cuadro de permiso de Claude Desktop para Write File con la ruta y el contenido de la minuta](img/12a-permiso-write-file.png)
+
 **12. Crear un archivo nuevo**
 
 ![Claude usando write_file para crear la minuta](img/12-op-crear.png)
 
+**13a. Claude Desktop pide permiso antes de `edit_file`**
+
+![Cuadro de permiso de Claude Desktop para Edit File con el texto viejo y el nuevo de pendientes.md](img/13a-permiso-edit-file.png)
+
 **13. Modificar un archivo existente**
 
-![Claude usando edit_file sobre pendientes.md con el diff](img/13-op-modificar.png)
+![Claude marcando como hechas las dos primeras tareas de pendientes.md](img/13-op-modificar.png)
 
 **14. Buscar por nombre y por contenido**
 
-![Claude usando search_files y read_text_file para encontrar el archivo que menciona Gradle](img/14-op-buscar.png)
+![Claude usando search_files dos veces y leyendo los archivos para encontrar el que menciona Gradle](img/14-op-buscar.png)
 
 **15. El límite de seguridad**
 

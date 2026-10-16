@@ -28,7 +28,7 @@ La versión que instalé es la **1.0.0**, publicada el 11 de octubre de 2026 (Mo
 | `edit_file` | Reemplaza líneas exactas y devuelve el *diff*; acepta `dryRun` para previsualizar. | Sí, destructiva |
 | `move_file` | Mueve o renombra; falla si el destino ya existe. | Sí, destructiva |
 
-Cada herramienta trae anotaciones: las de lectura declaran `readOnlyHint: true` y `write_file`, `edit_file` y `move_file` declaran `destructiveHint: true`. El host puede usarlas para decidir cuándo pedir confirmación, aunque la especificación aclara que son sugerencias y no deben tomarse como garantía. La búsqueda es **por nombre**: no hay una herramienta para buscar dentro del contenido. Para encontrar en qué archivo aparece una palabra, el modelo lista o busca los archivos y después los lee.
+Cada herramienta trae anotaciones: las de lectura declaran `readOnlyHint: true` y `write_file`, `edit_file` y `move_file` declaran `destructiveHint: true`. El host puede usarlas para decidir cuándo pedir confirmación, aunque la especificación aclara que son sugerencias y no deben tomarse como garantía. Claude Desktop las usa para agrupar: en los permisos del conector muestra 10 herramientas *de solo lectura* y 4 *de escritura/eliminación* (`write_file`, `edit_file`, `create_directory` y `move_file`), y todas empiezan en «Requiere aprobación». La búsqueda es **por nombre**: no hay una herramienta para buscar dentro del contenido. Para encontrar en qué archivo aparece una palabra, el modelo lista o busca los archivos y después los lee.
 
 ## Cómo lo limitan los directorios permitidos
 
