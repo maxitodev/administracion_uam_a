@@ -38,7 +38,14 @@ Al lanzarlo se le pasan una o varias carpetas como argumentos. En mi configuraci
 npx -y @modelcontextprotocol/server-filesystem@1.0.0 C:\Users\maxsa\Documents\UAM-A\administracion_uam_a\tarea2\sandbox
 ```
 
-Si el cliente ofrece *Roots*, la lista que manda el cliente **reemplaza** por completo a los argumentos (Model Context Protocol, 2026d). Si no la ofrece, se usan los argumentos. Al arrancar con mi cliente de prueba, el servidor lo dijo en su registro: *Client does not support MCP Roots, using allowed directories set from server args*.
+Si el cliente ofrece *Roots*, la lista que manda el cliente **reemplaza** por completo a los argumentos (Model Context Protocol, 2026d). Si no la ofrece, se usan los argumentos. Lo comprobé con la misma configuración en dos clientes de la misma aplicación:
+
+| Cliente | ¿Ofrece Roots? | Carpeta que quedó permitida |
+|---|---|---|
+| Chat de Claude Desktop | No. El registro dice *Client does not support MCP Roots, using allowed directories set from server args*. | `tarea2\sandbox`, la del argumento |
+| Pestaña Code de Claude Desktop, abierta en el repositorio | Sí. El registro dice *Updated allowed directories from MCP roots: 1 valid directories*. | `C:\Users\maxsa\Documents\UAM-A\administracion_uam_a`, es decir, **todo el repositorio** según `list_allowed_directories` |
+
+O sea, el argumento de la configuración no es un límite fijo: si el cliente manda raíces, mandan las del cliente. Por eso la demostración se hace en el chat. Si el servidor se usara desde un agente de programación, ese agente debe abrirse en la carpeta que se le quiere dar, no en la raíz del proyecto ni en la carpeta de usuario.
 
 En cada operación, el servidor convierte la ruta pedida en absoluta, la normaliza (resuelve los `..`) y sigue los enlaces simbólicos con `realpath` hasta el archivo real. Si el resultado no está dentro de una carpeta permitida, rechaza la operación antes de tocar el disco. Lo revisé en el código del paquete instalado (`dist/lib.js`) y lo probé:
 

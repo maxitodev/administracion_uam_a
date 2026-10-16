@@ -62,3 +62,4 @@ Catorce herramientas para listar, leer, buscar por nombre, ver información, cre
 - **¿Qué pasaría si le doy `C:\`?** El modelo podría leer `.ssh`, `.aws` y los `.env` de otros proyectos, y sobrescribir o mover cualquier cosa. Lo que lee viaja al servidor del proveedor.
 - **¿Qué cambió en la especificación 2026-07-28?** Quitaron el *handshake* `initialize`: cada petición lleva su versión y el servidor se anuncia con `server/discover`. Roots y Sampling quedaron obsoletas.
 - **¿El modelo ve todo mi disco por tener MCP?** No. Sólo ve lo que devuelven las herramientas que llama, y éstas sólo ven la carpeta permitida.
+- **¿La carpeta del argumento es siempre el límite?** No. Si el cliente soporta *Roots*, las raíces que manda reemplazan al argumento. Lo vi en mi máquina: en el chat de Claude Desktop el servidor quedó con `sandbox/`, y en la pestaña Code, abierta en el repositorio, quedó con todo el repositorio. Por eso la demostración va en el chat.
