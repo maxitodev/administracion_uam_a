@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "sistema-archivos": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem@1.0.0",
+        "C:\\Users\\maxsa\\Documents\\UAM-A\\administracion_uam_a\\tarea2\\sandbox"
+      ]
+    },
+    "entregas-apsw": {
+      "command": "C:\\Users\\maxsa\\Documents\\UAM-A\\administracion_uam_a\\tarea2\\servidor-propio\\.venv\\Scripts\\python.exe",
+      "args": [
+        "C:\\Users\\maxsa\\Documents\\UAM-A\\administracion_uam_a\\tarea2\\servidor-propio\\servidor.py",
+        "C:\\Users\\maxsa\\Documents\\UAM-A\\administracion_uam_a"
+      ]
+    }
+  }
+}
