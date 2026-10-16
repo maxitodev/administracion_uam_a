@@ -8,3 +8,7 @@ data/
 # Basura que generan Windows y macOS al abrir carpetas.
 Thumbs.db
 .DS_Store
+
+# Entorno virtual y cachés de Python del servidor MCP propio (Tarea 2).
+.venv/
+__pycache__/
