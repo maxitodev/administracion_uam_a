@@ -29,8 +29,10 @@ const archivo = windows
 if (windows) {
   // El Claude Desktop de la tienda vive en WindowsApps\Claude_…; el instalador clásico, en AnthropicClaude.
   // Otros claude.exe (como la CLI de Claude Code) no cuentan.
+  // Si no hay ningún proceso claude, Get-Process deja la ejecución en error y PowerShell
+  // sale con código 1, que execSync toma como fallo: el «exit 0» final lo evita.
   const rutas = execSync(
-    'powershell -NoProfile -Command "Get-Process claude -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Path"',
+    'powershell -NoProfile -Command "Get-Process claude -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Path; exit 0"',
     { encoding: "utf8" },
   );
   if (/WindowsApps\\Claude_|AnthropicClaude/i.test(rutas)) {
