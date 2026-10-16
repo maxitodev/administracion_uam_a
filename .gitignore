@@ -12,3 +12,6 @@ Thumbs.db
 # Entorno virtual y cachés de Python del servidor MCP propio (Tarea 2).
 .venv/
 __pycache__/
+
+# Carpeta de prueba del servidor MCP de archivos (Tarea 2): se crea localmente, no se versiona.
+tarea2/sandbox/

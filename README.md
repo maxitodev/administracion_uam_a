@@ -133,7 +133,7 @@ Para revisar la Tarea 2 hacen falta Node.js y Python. El servidor MCP propio se 
 cd tarea2/servidor-propio
 python -m venv .venv
 .venv/Scripts/python -m pip install -r requirements.txt
-.venv/Scripts/python comprobar.py archivos ../sandbox   # servidor de sistema de archivos
+.venv/Scripts/python comprobar.py archivos ../sandbox   # servidor de archivos (crear antes tarea2/sandbox)
 .venv/Scripts/python comprobar.py propio ../..          # servidor propio entregas-apsw
 ```
 
@@ -158,7 +158,6 @@ administracion_uam_a/
     ├── config/        la configuración de MCP para Claude Desktop y su instalador
     ├── img/           capturas de la instalación y de MCP
     ├── presentacion/  diapositivas y guion de la exposición
-    ├── sandbox/       la única carpeta que ve el servidor de sistema de archivos
     └── servidor-propio/  servidor MCP entregas-apsw (Python)
 ```
 

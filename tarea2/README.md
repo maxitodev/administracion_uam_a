@@ -37,7 +37,6 @@ tarea2/
 ├── config/            la configuración de MCP y un script que la instala
 ├── img/               capturas
 ├── presentacion/      diapositivas y guion
-├── sandbox/           la única carpeta que ve el servidor de archivos
 └── servidor-propio/   servidor MCP entregas-apsw (opcional)
 ```
 
@@ -108,7 +107,7 @@ Usé **Claude Desktop** (2.42304, Windows). Ya lo tenía, la guía oficial de MC
 
 Probado en Windows 11 Pro con Node.js 24.14.0, Python 3.13.4 y Claude Desktop 2.42304.
 
-1. Instalar Node.js y Claude Desktop, y clonar este repositorio.
+1. Instalar Node.js y Claude Desktop, clonar este repositorio y crear la carpeta `tarea2\sandbox` con algunos archivos de prueba. Esa carpeta es local y no se sube al repositorio.
 2. Cerrar Claude Desktop desde la bandeja (*Salir*). Si se edita la configuración con la app abierta, la reescribe y borra los cambios.
 3. Registrar los servidores con `node tarea2\config\instalar-mcp.mjs` (captura 8a). El script calcula las rutas según dónde esté el repositorio y deja un respaldo. También se puede hacer a mano en *Settings → Developer → Edit Config*.
 4. Abrir Claude Desktop. En *Servidores MCP locales* deben aparecer los dos servidores **En ejecución** (capturas 8b y 8c). En **+ → Conectores** se ven las 14 herramientas, todas con «Requiere aprobación» (captura 9).
@@ -149,7 +148,7 @@ La versión va fija (`@1.0.0`) y la única carpeta permitida es `tarea2/sandbox/
 | Marcar dos tareas en `proyecto/pendientes.md` | `edit_file` | 13a, 13 |
 | Buscar los `.md` y cuál menciona Gradle | `search_files` y lectura | 14 |
 
-Antes de escribir, Claude Desktop mostró la ruta y el contenido exactos, y elegí *Permitir una vez* (capturas 12a y 13a). En la búsqueda, el modelo primero buscó sin recursión, se dio cuenta de que le faltaba la subcarpeta y repitió con `**/*.md`. Lo que creó y modificó quedó en [`sandbox/proyecto/`](sandbox/proyecto/).
+Antes de escribir, Claude Desktop mostró la ruta y el contenido exactos, y elegí *Permitir una vez* (capturas 12a y 13a). En la búsqueda, el modelo primero buscó sin recursión, se dio cuenta de que le faltaba la subcarpeta y repitió con `**/*.md`.
 
 ### 4. El límite de seguridad
 
@@ -264,7 +263,7 @@ En Claude Desktop revisó esta tarea y respondió que está completa (captura 16
 
 ## Exposición
 
-Las diapositivas y el guion están en [`presentacion/`](presentacion/).
+Las diapositivas están en [PDF](presentacion/diapositivas.pdf) y en [HTML](presentacion/diapositivas.html); el guion, en [`presentacion/guion.md`](presentacion/guion.md).
 
 - **¿En qué se diferencia MCP de consumir una API?** Con una API, yo decido en el código qué se llama. Con MCP, el servidor publica un catálogo, el modelo decide qué usar en el momento y yo lo apruebo. MCP no reemplaza a la API: la envuelve.
 - **¿Qué habilita exactamente el servidor de sistema de archivos?** Listar, leer, buscar por nombre, crear, editar y mover archivos, sólo dentro de la carpeta permitida (o de las raíces que mande el cliente). Fuera de ella rechaza todo.

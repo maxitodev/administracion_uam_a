@@ -33,7 +33,7 @@ Así que el argumento no siempre es el límite final. Además, el límite lo pon
 
 ## Qué pasaría sin ese límite
 
-Si el servidor recibiera `C:\` o mi carpeta de usuario, el modelo podría leer llaves y credenciales (`.ssh`, `.aws`, archivos `.env`), y lo que lee viaja al servidor del proveedor. También podría sobrescribir o mover cualquier archivo por un error o por una instrucción escondida en un texto. Con `sandbox/` el daño máximo queda en cuatro archivos de ejemplo que además están en Git.
+Si el servidor recibiera `C:\` o mi carpeta de usuario, el modelo podría leer llaves y credenciales (`.ssh`, `.aws`, archivos `.env`), y lo que lee viaja al servidor del proveedor. También podría sobrescribir o mover cualquier archivo por un error o por una instrucción escondida en un texto. Con `sandbox/` el daño máximo queda en unos cuantos archivos de prueba.
 
 ## Referencias
 
