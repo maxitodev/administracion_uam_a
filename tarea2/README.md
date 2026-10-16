@@ -127,7 +127,7 @@ En el Pixel 7 Pro, la app muestra «¡Hola, Mundo!», el saludo de la plataforma
 
 1. **File → Open** → `C:\dev\HolaMundoKMP` y esperar a que termine el *Gradle sync*.
 2. Arriba, elegir la configuración **androidApp** y el teléfono como dispositivo.
-3. **Run ▶** ([captura 7](#capturas)).
+3. **Run ▶**. La app muestra «¡Hola Mundo!» y, debajo, la línea que escribe cada plataforma con su `actual`: «Compose Multiplatform en Android 17». Android Studio refleja la pantalla del teléfono en su panel **Running Devices** ([captura 7](#capturas)).
 
 Antes lo compilé desde la terminal con el JDK de Android Studio para tener listas las dependencias:
 
@@ -370,7 +370,7 @@ Está conectado al mismo cliente, en la entrada `entregas-apsw` del archivo de c
 
 **7. HolaMundoKMP en el teléfono, desde Android Studio**
 
-![Android Studio ejecutando androidApp de HolaMundoKMP en el teléfono](img/07-holamundokmp-android-studio.png)
+<img src="img/07-holamundokmp-android-studio.png" width="300" alt="Panel Running Devices de Android Studio con HolaMundoKMP en el Pixel 7 Pro: ¡Hola Mundo! Compose Multiplatform en Android 17">
 
 **8. Claude Desktop reconoce los dos servidores**
 
