@@ -4,53 +4,63 @@ lang: es
 title: Tarea 2 · Entorno móvil e IA con MCP
 author: Max Uriel Sánchez Díaz
 paginate: true
+size: 16:9
 style: |
-  :root { --uam: #b5121b; --tinta: #1f2328; --gris: #59636e; --fondo: #f6f8fa; }
-  section { font-family: "Segoe UI", system-ui, sans-serif; color: var(--tinta); font-size: 30px; padding: 56px 72px; }
-  h1 { color: var(--uam); font-size: 1.6em; margin-bottom: 0.3em; }
-  h2 { color: var(--uam); font-size: 1.15em; }
-  strong { color: var(--uam); }
-  code { background: var(--fondo); border-radius: 6px; padding: 0 6px; font-size: 0.85em; }
-  footer, section::after { color: var(--gris); font-size: 0.55em; }
-  section.portada { justify-content: center; }
-  section.portada h1 { font-size: 2.1em; }
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@500&display=swap');
+  :root { --uam: #c8102e; --uam2: #ff4d5e; --fondo: #0f1115; --panel: #1a1d24; --borde: #2a2f3a; --texto: #e8eaed; --gris: #9aa3af; }
+  section { font-family: Inter, "Segoe UI", sans-serif; background: var(--fondo); color: var(--texto); font-size: 28px; padding: 64px 80px; }
+  section::before { content: ""; position: absolute; left: 0; top: 0; width: 100%; height: 8px; background: linear-gradient(90deg, var(--uam), var(--uam2)); }
+  section::after { color: var(--gris); font-size: 0.55em; }
+  footer { color: var(--gris); font-size: 0.5em; }
+  h1 { font-weight: 800; font-size: 1.7em; color: #fff; margin: 0 0 0.4em; letter-spacing: -0.02em; }
+  h1::after { content: ""; display: block; width: 90px; height: 6px; margin-top: 14px; border-radius: 3px; background: var(--uam); }
+  h2 { color: var(--uam2); font-weight: 600; font-size: 1.05em; }
+  h3 { color: var(--uam2); margin: 0 0 10px; }
+  strong { color: var(--uam2); }
+  code { font-family: "JetBrains Mono", monospace; background: var(--panel); color: #ffb4bc; border: 1px solid var(--borde); border-radius: 6px; padding: 1px 8px; font-size: 0.8em; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.75em; margin-top: 24px; }
+  th { background: var(--uam); color: #fff; text-align: left; padding: 12px 16px; }
+  td { background: var(--panel); border-bottom: 1px solid var(--borde); padding: 12px 16px; }
+  section.portada { justify-content: center; background: radial-gradient(circle at 85% 20%, #3a0a12 0%, var(--fondo) 55%); }
+  section.portada h1 { font-size: 2.6em; }
+  section.portada h1::after { width: 140px; }
   section.portada p { color: var(--gris); }
-  section.grande p { font-size: 1.35em; line-height: 1.35; }
+  section.grande p { font-size: 1.3em; line-height: 1.4; }
+  section.centro { justify-content: center; text-align: center; }
+  section.centro h1::after { margin-left: auto; margin-right: auto; }
   .flujo { display: flex; gap: 18px; align-items: center; justify-content: center; margin-top: 30px; flex-wrap: wrap; }
-  .caja { border: 3px solid var(--uam); border-radius: 14px; padding: 18px 22px; text-align: center; min-width: 170px; background: #fff; }
+  .caja { background: var(--panel); border: 1px solid var(--borde); border-top: 4px solid var(--uam); border-radius: 14px; padding: 20px 26px; text-align: center; min-width: 180px; }
   .caja small { display: block; color: var(--gris); font-size: 0.6em; margin-top: 6px; }
-  .lejos { border-style: dashed; border-color: var(--gris); }
-  .flecha { font-size: 1.4em; color: var(--gris); }
-  .dos { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
-  .dos > div { background: var(--fondo); border-radius: 14px; padding: 22px 28px; }
-  .dos h3 { margin-top: 0; }
-  table { font-size: 0.8em; margin-top: 28px; }
+  .lejos { border-top-color: var(--gris); border-style: dashed; }
+  .flecha { font-size: 1.2em; color: var(--gris); }
+  .dos { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .dos > div { background: var(--panel); border: 1px solid var(--borde); border-radius: 16px; padding: 24px 30px; }
 footer: Tarea 2 · Administración de Proyectos de Software (1151055) · UAM Azcapotzalco · 26-O
 ---
 
 <!-- _class: portada -->
 <!-- _paginate: false -->
+<!-- _footer: "" -->
 
 # Del chat al proyecto
 
 ## Entorno móvil e IA con MCP
 
 Max Uriel Sánchez Díaz · 2213026327 · Ingeniería en Computación
+UAM Azcapotzalco · Trimestre 26-O
 
 <!--
-Presentarme y decir de qué van los 6 minutos: primero el teléfono quedó listo (30 s),
-luego por qué la IA no veía mis archivos, qué cambió con MCP, la demostración en vivo
-y cómo se limita. Termino con las dos preguntas.
+Presentarme y decir de qué van los 6 minutos.
 -->
 
 ---
 
-# Parte 1 · el entorno quedó listo
+# El entorno quedó listo
 
 <div class="flujo">
   <div class="caja">Flutter 3.47.7<small>Dart 3.13.5</small></div>
   <div class="caja">Android Studio<small>2026.2.1 + Command-line Tools</small></div>
-  <div class="caja">Mi teléfono<small>depuración USB</small></div>
+  <div class="caja">Pixel 7 Pro<small>Android 17 · depuración USB</small></div>
 </div>
 
 <div class="flujo">
@@ -59,9 +69,7 @@ y cómo se limita. Termino con las dos preguntas.
 </div>
 
 <!--
-Una sola diapositiva: lo instalado y que las dos apps corren en mi teléfono.
-El tropiezo: faltaban las Command-line Tools y una ruta mal escapada en local.properties.
-No leer la tabla de versiones: está en el README.
+Lo instalado y que las dos apps corren en mi teléfono.
 -->
 
 ---
@@ -81,9 +89,7 @@ No abre archivos. No ejecuta nada. Corre lejos.
 </div>
 
 <!--
-Arquitectura: corre en el servidor del proveedor, sólo ve lo que le mando, su salida es texto.
-Seguridad: no DEBE tocar todo; se equivoca y obedece instrucciones escondidas en lo que lee.
-El canal entre el modelo y el proyecto era yo.
+Arquitectura: corre en el servidor del proveedor. Seguridad: no debe tocar todo.
 -->
 
 ---
@@ -118,10 +124,7 @@ El servidor publica un **catálogo**; el **modelo** elige en el momento y yo apr
 </div>
 
 <!--
-Ésta es la pregunta 1. La diferencia es QUIÉN DECIDE: antes el programador, ahora el modelo
-leyendo descripciones. Descubrimiento en tiempo de ejecución, acoplamiento débil, N+M.
-MCP no sustituye a la API: la envuelve (el de archivos envuelve la API de archivos de Node;
-el de GitHub, su API REST).
+Pregunta 1: la diferencia es quién decide. MCP no sustituye a la API: la envuelve.
 -->
 
 ---
@@ -143,9 +146,7 @@ el de GitHub, su API REST).
 Especificación **2026-07-28**: sin *handshake*, cada petición lleva su versión.
 
 <!--
-El modelo NO es un rol de MCP: el host lo consulta por su API.
-Tools las controla el modelo, resources la app, prompts el usuario.
-Mi servidor negoció 2026-07-28; el de archivos, 2025-11-25 (generación anterior).
+El modelo no es un rol de MCP. Claude Desktop todavía usa el handshake con ambos servidores.
 -->
 
 ---
@@ -163,24 +164,21 @@ Mi servidor negoció 2026-07-28; el de archivos, 2025-11-25 (generación anterio
 `npx -y @modelcontextprotocol/server-filesystem@1.0.0 …\tarea2\sandbox`
 
 <!--
-Pregunta 2: qué habilita exactamente. Lo de la caja, y nada fuera de esa carpeta.
-Es un servidor de referencia, no parte del protocolo. Valida cada ruta con realpath.
-Nunca C:\ ni la carpeta de usuario: ahí están .ssh, .aws, tokens.
+Pregunta 2. Ojo: si el cliente manda Roots (pestaña Code), la carpeta la define el cliente.
 -->
 
 ---
 
-<!-- _class: grande -->
+<!-- _class: centro grande -->
 
 # Demostración en vivo
 
-listar · leer · crear · modificar · buscar
+listar · leer · crear · modificar
 
 y pedirle algo **fuera** de la carpeta
 
 <!--
-Cambiar a Claude Desktop. Prompts exactos en guion.md.
-Si algo falla: video de respaldo (2 min) en el escritorio.
+Cambiar a Claude Desktop (chat). Prompts en guion.md. Plan B: video.
 -->
 
 ---
@@ -189,19 +187,18 @@ Si algo falla: video de respaldo (2 min) en el escritorio.
 
 | Riesgo | Capa |
 |---|---|
-| Instrucciones escondidas en un archivo o en una descripción | Confirmación humana · revisar `tools/list` |
+| Instrucciones escondidas en un archivo o una descripción | Confirmación humana · revisar `tools/list` |
 | Salir de la carpeta (`..`, rutas absolutas, enlaces) | El servidor resuelve la ruta real y la rechaza |
 | Escribir o borrar sin querer | Carpeta de ejemplo · sólo lectura cuando basta · Git |
-| El paquete cambia solo (*rug pull*) | Versión fija `@1.0.0` |
+| El paquete cambia solo | Versión fija `@1.0.0` |
 
 <!--
-El límite de carpetas es "cooperativo": lo pone el código del servidor, no el sistema operativo.
-Por eso varias capas. Trifecta letal: datos privados + contenido no confiable + salida a red.
+El límite de carpetas lo pone el código del servidor, no el sistema operativo.
 -->
 
 ---
 
-# Extra · mi servidor `entregas-apsw`
+# Extra · servidor `entregas-apsw`
 
 SDK oficial de Python (`mcp` 2.3.0) · 3 herramientas de sólo lectura + 1 recurso
 
@@ -212,13 +209,12 @@ SDK oficial de Python (`mcp` 2.3.0) · 3 herramientas de sólo lectura + 1 recur
 | `dias_para_entrega` | ¿Cuánto falta, o cuánto descuento llevo? |
 
 <!--
-Mostrarlo en el mismo Claude Desktop si queda tiempo: "revisa si tarea2 está completa".
-También se niega a salir de la raíz del repositorio.
+Sólo si sobra tiempo.
 -->
 
 ---
 
-<!-- _class: grande -->
+<!-- _class: centro grande -->
 
 # Para llevar
 
@@ -227,6 +223,5 @@ También se niega a salir de la raíz del repositorio.
 El servidor de archivos habilita **14 operaciones** en **una carpeta**. Nada más.
 
 <!--
-Cerrar con la conclusión: el modelo nunca entra a mi computadora; un programa local,
-pequeño y explícito, actúa por él. Abrir a preguntas.
+Cerrar y abrir a preguntas.
 -->
