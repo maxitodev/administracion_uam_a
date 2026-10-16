@@ -38,6 +38,7 @@ Las prácticas de laboratorio y el proyecto integrador no van aquí: se trabajan
 | Tarea | Tema | Fecha límite |
 |---|---|---|
 | [Tarea 1](tarea1/) | Introducción a la administración de proyectos y entorno de trabajo: investigación (proyecto, marcos, herramientas y licencias), migración de un contenedor de PostgreSQL 17 a 18 y un segundo stack con MySQL y phpMyAdmin | Sábado 10 de octubre de 2026, 23:59 h |
+| [Tarea 2](tarea2/) | Entorno móvil e inteligencia artificial con MCP: Flutter y Kotlin Multiplatform en el teléfono, investigación del Model Context Protocol, servidor de sistema de archivos en Claude Desktop y un servidor MCP propio | Sábado 17 de octubre de 2026, 23:59 h |
 
 ## De qué trata la UEA
 
@@ -126,19 +127,39 @@ docker compose up -d      # MySQL 9.7.2 en 127.0.0.1:3307 y phpMyAdmin en http:/
 
 Los detalles, las salidas y las capturas están en el [README de la Tarea 1](tarea1/README.md).
 
+Para revisar la Tarea 2 hacen falta Node.js y Python. El servidor MCP propio se prepara así:
+
+```bash
+cd tarea2/servidor-propio
+python -m venv .venv
+.venv/Scripts/python -m pip install -r requirements.txt
+.venv/Scripts/python comprobar.py archivos ../sandbox   # servidor de sistema de archivos
+.venv/Scripts/python comprobar.py propio ../..          # servidor propio entregas-apsw
+```
+
+Para conectarlos a Claude Desktop, se cierra la aplicación y se corre `node tarea2/config/instalar-mcp.mjs`. Los pasos completos están en el [README de la Tarea 2](tarea2/README.md#parte-3-mcp-implementación).
+
 ## Estructura del repositorio
 
 ```text
 administracion_uam_a/
 ├── README.md          este documento
 ├── LICENSE            licencia MIT
-├── .gitignore         data/, .env, Thumbs.db y .DS_Store
+├── .gitignore         data/, .env, .venv/, Thumbs.db y .DS_Store
 ├── .gitattributes     finales de línea; LF para lo que corre en contenedores
-└── tarea1/            Tarea 1
+├── tarea1/            Tarea 1
+│   ├── README.md      documento de entrega
+│   ├── img/           las ocho capturas
+│   ├── postgres/      PostgreSQL 18 + Adminer (en el historial, antes PostgreSQL 17)
+│   └── mysql/         MySQL 9.7 + phpMyAdmin
+└── tarea2/            Tarea 2
     ├── README.md      documento de entrega
-    ├── img/           las ocho capturas
-    ├── postgres/      PostgreSQL 18 + Adminer (en el historial, antes PostgreSQL 17)
-    └── mysql/         MySQL 9.7 + phpMyAdmin
+    ├── docs/          la investigación sobre MCP, un archivo por punto
+    ├── config/        la configuración de MCP para Claude Desktop y su instalador
+    ├── img/           capturas de la instalación y de MCP
+    ├── presentacion/  diapositivas y guion de la exposición
+    ├── sandbox/       la única carpeta que ve el servidor de sistema de archivos
+    └── servidor-propio/  servidor MCP entregas-apsw (Python)
 ```
 
 ## Bibliografía de la UEA
