@@ -1,7 +1,7 @@
 # Pendientes de la Tarea 2
 
-- [ ] Instalar las Command-line Tools desde el SDK Manager
-- [ ] Aceptar las licencias con `flutter doctor --android-licenses`
+- [x] Instalar las Command-line Tools desde el SDK Manager
+- [x] Aceptar las licencias con `flutter doctor --android-licenses`
 - [ ] Activar la depuración USB del teléfono
 - [ ] Correr HolaMundoFlutter en el teléfono
 - [ ] Correr HolaMundoKMP desde Android Studio
