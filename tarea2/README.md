@@ -323,7 +323,7 @@ tools/list devolvió 3 herramientas:
   - dias_para_entrega (sólo lectura): Calcula cuánto falta para la fecha límite o, si ya pasó, el retraso y su descuento.
 
 >>> buscar_credenciales [ok]
-4 posible(s) credencial(es) en 17 archivos:
+4 posible(s) credencial(es) en 29 archivos:
   tarea1/mysql/compose.yaml:33  token o contraseña asignados  (PASSWORD…)
   tarea1/mysql/compose.yaml:36  token o contraseña asignados  (PASSWORD…)
   tarea1/postgres/.env.example:11  token o contraseña asignados  (PASSWORD…)
@@ -336,7 +336,7 @@ Tarde por 2 día(s): la calificación se reduce 20 %.
 Error executing tool buscar_credenciales: Acceso denegado: «..» queda fuera de C:\Users\maxsa\Documents\UAM-A\administracion_uam_a
 ```
 
-Las cuatro coincidencias son las contraseñas de desarrollo por omisión de los contenedores de la Tarea 1 (`${MYSQL_PASSWORD:-practica_local_26o}` y similares), que sólo funcionan en `127.0.0.1`. No son secretos, pero es justo lo que conviene revisar antes de cada push. Este servidor negocia la revisión 2026-07-28, la nueva y sin *handshake*, mientras que el de archivos usa la 2025-11-25.
+Las cuatro coincidencias son las contraseñas de desarrollo por omisión de los contenedores de la Tarea 1 (los valores de respaldo de `MYSQL_PASSWORD`, `MYSQL_ROOT_PASSWORD` y `POSTGRES_PASSWORD`), que sólo funcionan en `127.0.0.1`. No son secretos, pero es justo lo que conviene revisar antes de cada push. Este servidor negocia la revisión 2026-07-28, la nueva y sin *handshake*, mientras que el de archivos usa la 2025-11-25.
 
 Está conectado al mismo cliente, en la entrada `entregas-apsw` del archivo de configuración. En la [captura 16](#capturas), Claude Desktop lo usa para revisar si esta tarea está completa.
 
