@@ -263,7 +263,7 @@ En Claude Desktop revisó esta tarea y respondió que está completa (captura 16
 
 ## Exposición
 
-Las diapositivas están en [PDF](presentacion/diapositivas.pdf) y en [HTML](presentacion/diapositivas.html); el guion, en [`presentacion/guion.md`](presentacion/guion.md).
+Las diapositivas están en [PDF](presentacion/diapositivas.pdf) y en [HTML](presentacion/diapositivas.html); el guion, en [`presentacion/guion.md`](presentacion/guion.md), y el [video de respaldo](presentacion/video-respaldo.mp4) (2:00), por si falla la demostración en vivo.
 
 - **¿En qué se diferencia MCP de consumir una API?** Con una API, yo decido en el código qué se llama. Con MCP, el servidor publica un catálogo, el modelo decide qué usar en el momento y yo lo apruebo. MCP no reemplaza a la API: la envuelve.
 - **¿Qué habilita exactamente el servidor de sistema de archivos?** Listar, leer, buscar por nombre, crear, editar y mover archivos, sólo dentro de la carpeta permitida (o de las raíces que mande el cliente). Fuera de ella rechaza todo.

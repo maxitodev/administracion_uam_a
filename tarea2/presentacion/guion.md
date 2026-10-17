@@ -27,7 +27,7 @@ Antes de empezar: Claude Desktop abierto en un **chat** nuevo (no en la pestaña
 4. `En proyecto/pendientes.md marca como hecha la tercera tarea.`
 5. `Lee el archivo C:\Users\maxsa\Documents\UAM-A\administracion_uam_a\tarea2\README.md` y señalar que lo frenó el servidor, no el modelo.
 
-Si algo falla, pongo el video de respaldo: la misma demostración, de 2 minutos como máximo, grabada con **Win + Alt + R**.
+Si algo falla, pongo el [video de respaldo](video-respaldo.mp4): dos minutos que explican cómo funciona MCP y repasan la demostración.
 
 ## Las dos preguntas
 
